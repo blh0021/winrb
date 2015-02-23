@@ -1,10 +1,25 @@
-@echo off
-echo "rbenv"
-if [%1]==[install] GOTO Dl1
-GOTO End1
-:Dl1
+@ECHO off
+rem ECHO WINRB - Windows rbenv alternative
+IF "%OLDPATH%" == "" (
+	set "OLDPATH=%PATH%"
+)
 
-if [%2]==[2.0.0] wget -o ruby\ruby2.0.0_64.exe http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.0.0-p598-x64.exe?direct
+IF [%1]==[versions] (
+	dir /a:d /b %USERPROFILE%\.winrb\ruby
+	GOTO :END1
+)
 
-if [%2]==[2.1.5] wget -o ruby\ruby2.1.5_64.exe http://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-2.1.5-x64.exe?direct
-:End1
+
+IF [%1]==[local] (
+	SET "PATH=%USERPROFILE%\.winrb\ruby\%2\bin;%OLDPATH%"
+	GOTO :END1
+)
+
+IF [%1]==[install] (
+	call %USERPROFILE%\.winrb\ruby-install.bat %2
+	GOTO END1
+)
+
+
+
+:END1
