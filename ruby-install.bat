@@ -13,6 +13,7 @@ SET "outfile= "
 
 call:readINI location %1 location
 call:readINI outfile %1 filename
+call:readINI devloc %1 devloc
 rem echo.loc %location%
 echo.out %outfile%
 
@@ -25,7 +26,13 @@ set outfile=%outfile:.zip=%
 ren %USERPROFILE%\.winrb\ruby\%outfile% %1
 
 :readINI 
-for /f "delims=" %%a in ('call %USERPROFILE%\.winrb\read-ini.bat %USERPROFILE%\.winrb\install.ini %~2 %~3') do (
+IF defined PROGRAMFILES(x86) (
+	SET arch=64
+) ELSE (
+	SET arch=32
+)
+
+for /f "delims=" %%a in ('call %USERPROFILE%\.winrb\read-ini.bat %USERPROFILE%\.winrb\install_%arch%.ini %~2 %~3') do (
     set %~1=%%a
 )
 GOTO:EOF

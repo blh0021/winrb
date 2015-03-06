@@ -1,5 +1,6 @@
 @ECHO off
 rem ECHO WINRB - Windows rbenv alternative
+
 IF "%OLDPATH%" == "" (
 	set "OLDPATH=%PATH%"
 )
