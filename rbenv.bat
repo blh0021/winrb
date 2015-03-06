@@ -5,7 +5,13 @@ IF "%OLDPATH%" == "" (
 )
 
 for /f "delims=" %%i in ('%USERPROFILE%\.winrb\jscript\bin\pdfind.exe') do set output=%%i
-SET /p rlocal=<%output%
+
+IF [%output%]==[false] (
+	echo No local ruby version defined!
+) ELSE (
+	SET /p rlocal=<%output%
+)
+
 SET "PATH=%USERPROFILE%\.winrb\%rlocal%\bin;%OLDPATH%"
 
 IF [%1]==[versions] (
