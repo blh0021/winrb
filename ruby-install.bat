@@ -23,7 +23,9 @@ wget --no-check-certificate -O %USERPROFILE%\.winrb\ruby\%outfile% %location%
 set outfile=%outfile:.7z=%
 set outfile=%outfile:.zip=%
 
-ren %USERPROFILE%\.winrb\ruby\%outfile% %1
+IF NOT [%outfile%]==[%1] (
+	ren %USERPROFILE%\.winrb\ruby\%outfile% %1
+)
 
 :readINI 
 IF defined PROGRAMFILES(x86) (
@@ -36,5 +38,5 @@ for /f "delims=" %%a in ('call %USERPROFILE%\.winrb\read-ini.bat %USERPROFILE%\.
     set %~1=%%a
 )
 GOTO:EOF
-
+``
 :END1
