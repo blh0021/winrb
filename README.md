@@ -5,7 +5,7 @@ Things to Do
 ```
 Allow rbenv to read .ruby-version file
 Add Alias functionality to simplify using rbenv local
-Automatically change ruby version based on ruby file in directory
+DevKit and C-Extensions
 ```
 
 Dependencies
