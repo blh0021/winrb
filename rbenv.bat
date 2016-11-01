@@ -31,7 +31,7 @@ IF [%1]==[install] (
 )
 
 IF [%1]==[fixcert] (
-	wget curl.haxx.se/ca/cacert.pem -O %USERPROFILE%\.winrb\cert\cacert.pem
+	wget curl.haxx.se/ca/cacert.pem -O %USERPROFILE%\.winrb\cert\cacert.pem --no-check-certificate
 	set SSL_CERT_FILE=%USERPROFILE%\.winrb\cert\cacert.pem
 )
 :END1
