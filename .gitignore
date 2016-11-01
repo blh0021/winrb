@@ -2,3 +2,4 @@ ruby/*
 *.swp
 *~
 *.pem
+devkit
