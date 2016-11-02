@@ -1,8 +1,18 @@
 @ECHO off
 rem ECHO WINRB - Windows rbenv alternative
 
+IF [%1]==[] (
+	echo rbenv
+	echo     - install versionNum
+	echo     - local versionNum
+	echo     - versions                "will list the versions installed"
+	echo     - devkit                  "install devkit for native compiling"
+	echo     - fixcert                 "download new cert for gemfiles"
+	GOTO :END1
+)
+
 IF "%OLDPATH%" == "" (
-	set "OLDPATH=%PATH%"
+	SET "OLDPATH=%PATH%"
 )
 
 for /f "delims=" %%i in ('%USERPROFILE%\.winrb\jscript\bin\pdfind.exe') do set output=%%i
@@ -22,11 +32,17 @@ IF [%1]==[versions] (
 
 IF [%1]==[local] (
 	SET "PATH=%USERPROFILE%\.winrb\ruby\%2\bin;%OLDPATH%"
+	%USERPROFILE%\.winrb\devkit\devkitvars.bat
 	GOTO :END1
 )
 
 IF [%1]==[install] (
 	call %USERPROFILE%\.winrb\ruby-install.bat %2
+	GOTO END1
+)
+
+IF [%1]==[devkit] (
+	call %USERPROFILE%\.winrb\devk-install.bat DevKit
 	GOTO END1
 )
 
