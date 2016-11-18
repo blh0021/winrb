@@ -15,7 +15,7 @@ IF "%OLDPATH%" == "" (
 	SET "OLDPATH=%PATH%"
 )
 
-for /f "delims=" %%i in ('%USERPROFILE%\.winrb\jscript\bin\pdfind.exe') do set output=%%i
+for /f "delims=" %%i in ('"%USERPROFILE%\.winrb\jscript\bin\pdfind.exe"') do set output=%%i
 
 IF [%output%]==[false] (
 	echo No local ruby version defined!
@@ -26,28 +26,28 @@ IF [%output%]==[false] (
 )
 
 IF [%1]==[versions] (
-	dir /a:d /b %USERPROFILE%\.winrb\ruby
+	dir /a:d /b "%USERPROFILE%\.winrb\ruby"
 	GOTO :END1
 )
 
 IF [%1]==[local] (
 	SET "PATH=%USERPROFILE%\.winrb\ruby\%2\bin;%OLDPATH%"
-	%USERPROFILE%\.winrb\devkit\devkitvars.bat
+	"%USERPROFILE%\.winrb\devkit\devkitvars.bat"
 	GOTO :END1
 )
 
 IF [%1]==[install] (
-	call %USERPROFILE%\.winrb\ruby-install.bat %2
+	call "%USERPROFILE%\.winrb\ruby-install.bat" %2
 	GOTO END1
 )
 
 IF [%1]==[devkit] (
-	call %USERPROFILE%\.winrb\devk-install.bat DevKit
+	call "%USERPROFILE%\.winrb\devk-install.bat" DevKit
 	GOTO END1
 )
 
 IF [%1]==[fixcert] (
-	wget curl.haxx.se/ca/cacert.pem -O %USERPROFILE%\.winrb\cert\cacert.pem --no-check-certificate
+	wget curl.haxx.se/ca/cacert.pem -O "%USERPROFILE%\.winrb\cert\cacert.pem" --no-check-certificate
 	set SSL_CERT_FILE=%USERPROFILE%\.winrb\cert\cacert.pem
 )
 :END1
